@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+.mat-h6, .mat-typography h6 {
+  font: 1rem Poppins, "Poppins", sans-serif;
+  margin: 0 0 12px;
+}
+
+.mat-body, .mat-body-1, .mat-typography {
+  font: 13px Poppins, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+}
+
+.mat-h5, .mat-typography h5 {
+  font: 1.25rem Poppins, "Helvetica Neue", sans-serif;
+  margin: 0 0 12px;
+}
+
+.mat-h4, .mat-subheading-1, .mat-typography h4 {
+  font: 1.5rem Poppins, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+.mat-dialog-container {
+  background: #FFF;
+  color: #000;
+}
+.cdk-global-overlay-wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  overflow: auto;
+  pointer-events: auto;
+}

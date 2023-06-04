@@ -1,0 +1,33 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand navbar-dark bg-navbar osahan-nav-top p-0">
+  <div class="container">
+    <ul class="navbar-nav ml-auto d-flex align-items-center">
+      <li class="nav-item mr-2">
+        <a class="nav-link pr-0" [routerLink]="['/home']">
+          <i class="feather-home mr-1"></i
+          ><span class="d-none d-lg-inline">Inicio</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown mr-2">
+        <a
+          class="nav-link dropdown-toggle pr-0"
+          href="#"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="feather-user mr-1"></i
+          ><span class="d-none d-lg-inline">Mi cuenta</span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right shadow-sm">
+          <a class="dropdown-item" (click)="logout()"
+            ><i class="feather-log-out mr-1"></i> Cerrar sesión</a
+          >
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</nav>

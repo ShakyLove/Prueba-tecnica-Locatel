@@ -1,0 +1,15 @@
+p {
+  color: #000;
+}
+h5 {
+  font-weight: bold;
+}
+.info-value {
+  text-align: end;
+}
+.p-title {
+  font-size: 16px;
+}
+.tikect {
+  box-shadow: 2px 2px 20px 8px rgb(0 0 0 / 20%);
+}

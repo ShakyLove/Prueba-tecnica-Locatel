@@ -1,0 +1,88 @@
+<a style="float: right; font-size: 17px" mat-dialog-close>
+  <i class="feather-x"></i>
+</a>
+<div class="container">
+  <div class="text-center">
+    <h5 class="text-primary bold">{{ title }} dinero</h5>
+    <hr />
+  </div>
+  <div>
+    <div *ngIf="response === null">
+      <div>
+        <p>Cuenta de ahorros {{ datos.accountNumber }}</p>
+        <div class="info-value">
+          <p class="m-0">Saldo disponible</p>
+          <p class="m-0">
+            <b>$ {{ datos.valueCount }}</b>
+          </p>
+        </div>
+      </div>
+      <form
+        action="index.html"
+        class="mt-2"
+        [formGroup]="consignmentForm"
+        (ngSubmit)="movements(consignmentForm.value)"
+      >
+        <div class="form-group">
+          <label class="mb-1">Ingresa valor a {{ title }}</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input
+              autocomplete="off"
+              type="float"
+              [formControl]="value"
+              [value]="value.value | number : '1.0-0'"
+              class="form-control"
+              required
+            />
+            <div class="input-group-append"></div>
+          </div>
+        </div>
+        <div *ngIf="datos.type == 1" class="form-group">
+          <label class="mb-1">Ingrese número de cuenta destino</label>
+          <div class="position-relative icon-form-control">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="accountNumber"
+
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-info btn-block text-uppercase"
+          type="submit"
+          [disabled]="consignmentForm.invalid"
+        >
+          {{ title }}
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="response != null" class="mt-3 tikect border m-3">
+      <div class="col-md-12 mt-3">
+        <div style="display: flex; justify-content: center">
+          <img src="/assets/img/checked.png" width="30px" alt="" />
+        </div>
+        <div class="text-center">
+          <h6>{{ response.message }}</h6>
+        </div>
+      </div>
+      <div class="pl-5 pr-5 pb-5 pt-3">
+        <p class="p-title m-0"><b>Producto origen</b></p>
+        <p>{{ datos.accountNumber }}</p>
+        <hr />
+        <div *ngIf="datos.type == 1">
+          <p class="p-title m-0"><b>Producto destino</b></p>
+          <p>{{ originCount }}</p>
+          <hr />
+        </div>
+        <p class="p-title" style="text-align:end;">
+          <b>Valor: $ {{ valueMove }}</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

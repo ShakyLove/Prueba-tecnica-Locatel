@@ -1,0 +1,61 @@
+<div class="bg-white">
+  <div class="container">
+    <div class="row justify-content-center align-items-center d-flex vh-100">
+      <div class="img-work col-md-7">
+        <img src="/assets/img/Revenue-pana.png" alt="" />
+      </div>
+      <div class="col-md-4 mx-auto">
+        <div *ngIf="forms" class="osahan-login py-4">
+          <div class="text-center mb-4">
+              <h5 class="font-weight-bold mt-3">Bienvenido</h5>
+            <p class="text-muted">
+              Realiza transacciones, transferencias, obtén información y
+              administra tus productos de forma sencilla y segura las 24 horas
+              del día, todo ello desde tu computadora.
+            </p>
+          </div>
+          <form action="index.html" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+            <div class="form-group">
+              <label class="mb-1">Número de identificación</label>
+              <div class="position-relative icon-form-control">
+                <i class="feather-user position-absolute"></i>
+                <input type="email" class="form-control" formControlName="identification"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="mb-1">Contraseña</label>
+              <div class="position-relative icon-form-control">
+                <i class="feather-unlock position-absolute"></i>
+                <input type="password" class="form-control" formControlName="password"/>
+              </div>
+            </div>
+            <button class="btn btn-info btn-block text-uppercase" type="submit">
+              Ingresar
+            </button>
+            <div class="py-3 d-flex align-item-center">
+              <span class="ml-auto">
+                Eres nuevo?
+                <a
+                  (click)="forms = false"
+                  class="font-weight-bold"
+                  href=""
+                  >Crear cuenta</a
+                ></span
+              >
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="forms === false">
+          <app-register></app-register>
+          <div class="py-3 d-flex align-item-center">
+            <span class="ml-auto">
+              Ya tienes una cuenta?
+              <a (click)="forms = true" class="font-weight-bold" href="">Iniciar Sesión</a></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
