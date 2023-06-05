@@ -108,22 +108,45 @@ class MovementView(View):
             elif Decimal(bodyData['value']) < 10000 and bodyData['type'] == 2:
                 data = {'message': 'No se puede hacer un retiro menor a $10.000', 'icon': 'error'}
                 return JsonResponse(data)
-
+            
             if bodyData['type'] == 1:
                 detail   = 'Consignación cuenta de ahorros'
                 message  = '¡Consignación exitosa!'
             elif bodyData['type'] == 2:
-                detail  = 'Retiro cuenta de ahorros'
-                message = '¡Retiro exitoso!'
+                detail   = 'Retiro cuenta de ahorros'
+                message  = '¡Retiro exitoso!'
             
             type_mov = bodyData['type']
             if bodyData['accountNumber'] != '':
+
                 if Decimal(bodyData['accountNumber']) == Decimal(account.account_number):
                     account.value_count += Decimal(bodyData['value'])
                     type_mov = 3
+                    account_mov = bodyData['accountNumber']
+
                 elif Decimal(bodyData['accountNumber']) != Decimal(account.account_number):
+
+                    """Consultamos la cuenta destino"""
+                    try:
+                        account_des = Account.objects.get(account_number = bodyData['accountNumber'])
+                        """Sumamos el valor de la consignacion a la cuenta"""
+                        account_des.value_count += Decimal(bodyData['value'])
+                        account_des.save()
+
+                        """Hacemos registro en la tabla movimientos"""
+                        movement             = Movements()
+                        movement.detail      = detail
+                        movement.value_mov   = bodyData['value']
+                        movement.account     = account_des
+                        movement.account_mov = account.account_number
+                        movement.type_mov    = 3
+                        movement.save()
+                    except Account.DoesNotExist:
+                        data = {'message': 'Número de cuenta no existe', 'icon': 'error'}
+                        return JsonResponse(data)
+
                     account.value_count -= Decimal(bodyData['value'])
-                account_mov = bodyData['accountNumber']
+                    account_mov = bodyData['accountNumber']
             else:
                 account_mov = account.account_number
                 account.value_count -= Decimal(bodyData['value'])
